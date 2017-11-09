@@ -1,0 +1,25 @@
+name: mfgtools-lool
+version: 2.3.4
+summary: Freescale/NXP I.MX Chip image deploy tools
+description: |
+  Freescale/NXP I.MX Chip image deploy tools.
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+apps:
+  mfgtoolcli:
+    command: bin/mfgtoolcli
+
+parts:
+  mgstools:
+    plugin: nil
+    build-packages: [build-essential, cmake, libusb-1.0-0-dev, make]
+    source: https://github.com/NXPmicro/mfgtools.git
+    prepare: |
+      cd TestPrgm && make cmake
+    build:
+      cd TestPrgm && make
+    install: |
+      install -t $SNAPCRAFT_PART_INSTALL/lib -m 644 TestPrgm/libMfgToolLib.so
+      install -t $SNAPCRAFT_PART_INSTALL/bin -m 755 TestPrgm/mfgtoolcli
+
