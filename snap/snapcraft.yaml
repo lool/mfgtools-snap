@@ -20,6 +20,6 @@ parts:
     build:
       cd TestPrgm && make
     install: |
-      install -t $SNAPCRAFT_PART_INSTALL/lib -m 644 TestPrgm/libMfgToolLib.so
-      install -t $SNAPCRAFT_PART_INSTALL/bin -m 755 TestPrgm/mfgtoolcli
+      install -D -t $SNAPCRAFT_PART_INSTALL/lib -m 644 TestPrgm/libMfgToolLib.so
+      install -D -t $SNAPCRAFT_PART_INSTALL/bin -m 755 TestPrgm/mfgtoolcli
 
